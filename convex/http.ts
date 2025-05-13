@@ -17,8 +17,8 @@ http.route({
     }
 
     const svix_id = request.headers.get("svix-id");
-    const svix_signature = request.headers.get("svix_signature");
-    const svix_timestamp = request.headers.get("svix_timestamp");
+    const svix_signature = request.headers.get("svix-signature");
+    const svix_timestamp = request.headers.get("svix-timestamp");
 
     if (!svix_id || !svix_signature || !svix_timestamp) {
       return new Response("No svix headers found", {
@@ -69,3 +69,5 @@ http.route({
     return new Response("Webhooks processed successfully", { status: 200 });
   }),
 });
+
+export default http;
