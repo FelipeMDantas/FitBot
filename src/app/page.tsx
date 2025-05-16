@@ -1,4 +1,6 @@
+import TerminalOverlay from "@/components/TerminalOverlay";
 import { Button } from "@/components/ui/button";
+import UserPrograms from "@/components/UserPrograms";
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -102,11 +104,14 @@ const HomePage = () => {
 
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
                 </div>
+                <TerminalOverlay />
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <UserPrograms />
     </div>
   );
 };
