@@ -5,11 +5,12 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const GenerateProgramPage = () => {
   const [callActive, setCallActive] = useState(false);
   const [connecting, setConnecting] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(true);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [messages, setMessages] = useState<any[]>([]);
   const [callEnded, setCallEnded] = useState(false);
 
@@ -151,10 +152,84 @@ const GenerateProgramPage = () => {
               <p className="text-sm text-muted-foreground mt-1">
                 Fitness & Diet Coach
               </p>
+
+              <div
+                className={`mt-4 flex items-center gap-2 px-3 py-1 rounded-full bg-card border border-border ${
+                  isSpeaking ? "border-primary" : ""
+                }`}
+              >
+                <div
+                  className={`w-2 h-2 rounded-full ${
+                    isSpeaking ? "bg-primary animate-pulse" : "bg-muted"
+                  }`}
+                />
+
+                <span className="text-xs text-muted-foreground">
+                  {isSpeaking
+                    ? "Speaking..."
+                    : callActive
+                      ? "Listening..."
+                      : callEnded
+                        ? "Redirecting to profile..."
+                        : "Waiting..."}
+                </span>
+              </div>
             </div>
           </Card>
 
-          <Card></Card>
+          <Card
+            className={`bg-card/90 backdrop-blur-sm border overflow-hidden relative`}
+          >
+            <div className="aspect-video flex flex-col items-center justify-center p-6 relative">
+              <div className="relative size-32 mb-4">
+                <img
+                  src={user?.imageUrl}
+                  alt="User"
+                  className="size-full object-cover rounded-full"
+                />
+              </div>
+
+              <h2 className="text-xl font-bold text-foreground">You</h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                {user
+                  ? (user.firstName + " " + (user.lastName || "")).trim()
+                  : "Guest"}
+              </p>
+
+              <div
+                className={`mt-4 flex items-center gap-2 px-3 py-1 rounded-full bg-card border`}
+              >
+                <div className={`w-2 h-2 rounded-full bg-muted`} />
+                <span className="text-xs text-muted-foreground">Ready</span>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        <div className="w-full flex justify-center gap-4">
+          <Button
+            className={`w-40 text-xl rounded-3xl ${
+              callActive
+                ? "bg-destructive hover:bg-destructive/90"
+                : callEnded
+                  ? "bg-green-600 hover:bg-green-700"
+                  : "bg-primary hover:bg-primary/90"
+            } text-white relative`}
+          >
+            {connecting && (
+              <span className="absolute inset-0 rounded-full animate-ping bg-primary/50 opacity-75"></span>
+            )}
+
+            <span>
+              {callActive
+                ? "End Call"
+                : connecting
+                  ? "Connecting..."
+                  : callEnded
+                    ? "View Profile"
+                    : "Start Call"}
+            </span>
+          </Button>
         </div>
       </div>
     </div>
