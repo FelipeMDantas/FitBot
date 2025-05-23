@@ -61,7 +61,12 @@ const GenerateProgramPage = () => {
       console.log("AI stopped Speaking");
       setIsSpeaking(false);
     };
-    const handleMessage = (message: any) => {};
+    const handleMessage = (message: any) => {
+      if (message.type === "transcript" && message.transcriptType === "final") {
+        const newMessage = { content: message.transcript, role: message.role };
+        setMessages((prev) => [...prev, newMessage]);
+      }
+    };
 
     const handleError = (error: any) => {
       console.log("Vapi Error", error);
@@ -215,6 +220,8 @@ const GenerateProgramPage = () => {
                   ? "bg-green-600 hover:bg-green-700"
                   : "bg-primary hover:bg-primary/90"
             } text-white relative`}
+            //onClick={toggleCall}
+            disabled={connecting || callEnded}
           >
             {connecting && (
               <span className="absolute inset-0 rounded-full animate-ping bg-primary/50 opacity-75"></span>
