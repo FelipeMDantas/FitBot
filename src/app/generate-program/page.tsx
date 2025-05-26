@@ -93,6 +93,37 @@ const GenerateProgramPage = () => {
     };
   }, []);
 
+  const toggleCall = async () => {
+    if (callActive) vapi.stop();
+    else {
+      try {
+        setConnecting(true);
+        setMessages([]);
+        setCallEnded(false);
+
+        const fullName = user?.firstName
+          ? `${user.firstName} ${user.lastName || ""}`.trim()
+          : "There";
+
+        await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
+          variableValues: {
+            full_name: fullName,
+            user_id: user?.id,
+          },
+          clientMessages: messages.filter((msg) => {
+            return msg.role !== "assistant";
+          }),
+          serverMessages: messages.filter((msg) => {
+            return msg.role === "assistant";
+          }),
+        });
+      } catch (error) {
+        console.log("Failed to start call", error);
+        setConnecting(false);
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen text-foreground overflow-hidden  pb-6 pt-24">
       <div className="container mx-auto px-4 h-full max-w-5xl">
@@ -250,11 +281,11 @@ const GenerateProgramPage = () => {
                   ? "bg-green-600 hover:bg-green-700"
                   : "bg-primary hover:bg-primary/90"
             } text-white relative`}
-            //onClick={toggleCall}
+            onClick={toggleCall}
             disabled={connecting || callEnded}
           >
             {connecting && (
-              <span className="absolute inset-0 rounded-full animate-ping bg-primary/50 opacity-75"></span>
+              <span className="absolute inset-0 rounded-full animate-ping bg-primary/50 opacity-75" />
             )}
 
             <span>
