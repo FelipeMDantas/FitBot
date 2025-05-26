@@ -3,8 +3,11 @@ import { httpAction } from "./_generated/server";
 import { Webhook } from "svix";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { api } from "./_generated/api";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const http = httpRouter();
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 http.route({
   path: "/clerk-webhook",
