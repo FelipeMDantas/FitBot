@@ -1,3 +1,5 @@
+"use client";
+
 import ProfileHeader from "@/components/ProfileHeader";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
@@ -7,7 +9,13 @@ import CornerElements from "@/components/CornerElements";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DumbbellIcon } from "lucide-react";
+import { CalendarIcon, DumbbellIcon } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const ProfilePage = () => {
   const { user } = useUser();
@@ -82,6 +90,44 @@ const ProfilePage = () => {
                     <DumbbellIcon className="mr-2 size-4" />
                   </TabsTrigger>
                 </TabsList>
+
+                <TabsContent value="workout">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 mb-4">
+                      <CalendarIcon className="h-4 w-4 text-primary" />
+                      <span className="font-mono text-sm text-muted-foreground">
+                        SCHEDULE: {currentPlan.workoutPlan.schedule.join(", ")}
+                      </span>
+                    </div>
+
+                    <Accordion type="multiple" className="space-y-4">
+                      {currentPlan.workoutPlan.exercises.map(
+                        (exerciseDay, index) => (
+                          <AccordionItem
+                            key={index}
+                            value={exerciseDay.day}
+                            className="border rounded-lg overflow-hidden"
+                          >
+                            <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-primary/10 font-mono">
+                              <div className="flex justify-between w-full items-center">
+                                <span className="text-primary">
+                                  {exerciseDay.day}
+                                </span>
+                                <div className="text-xs text-muted-foreground">
+                                  {exerciseDay.routines.length} EXERCISES
+                                </div>
+                              </div>
+                            </AccordionTrigger>
+
+                            <AccordionContent className="pb-4 px-4">
+                              <div className="space-y-3 mt-2"></div>
+                            </AccordionContent>
+                          </AccordionItem>
+                        )
+                      )}
+                    </Accordion>
+                  </div>
+                </TabsContent>
               </Tabs>
             </div>
           )}
