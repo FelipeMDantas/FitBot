@@ -120,12 +120,84 @@ const ProfilePage = () => {
                             </AccordionTrigger>
 
                             <AccordionContent className="pb-4 px-4">
-                              <div className="space-y-3 mt-2"></div>
+                              <div className="space-y-3 mt-2">
+                                {exerciseDay.routines.map(
+                                  (routine, routineIndex) => (
+                                    <div
+                                      key={routineIndex}
+                                      className="border border-border rounded p-3 bg-background/50"
+                                    >
+                                      <div className="flex justify-between items-start mb-2">
+                                        <h4 className="font-semibold text-foreground">
+                                          {routine.name}
+                                        </h4>
+                                        <div className="flex items-center gap-2">
+                                          <div className="px-2 py-1 rounded bg-primary/20 text-primary text-xs font-mono">
+                                            {routine.sets} SETS
+                                          </div>
+                                          <div className="px-2 py-1 rounded bg-secondary/20 text-secondary text-xs font-mono">
+                                            {routine.reps} REPS
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {routine.description && (
+                                        <p className="text-sm text-muted-foreground mt-1">
+                                          {routine.description}
+                                        </p>
+                                      )}
+                                    </div>
+                                  )
+                                )}
+                              </div>
                             </AccordionContent>
                           </AccordionItem>
                         )
                       )}
                     </Accordion>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="diet">
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="font-mono text-sm text-muted-foreground">
+                        DAILY CALORIE TARGET
+                      </span>
+                      <div className="font-mono text-xl text-primary">
+                        {currentPlan.dietPlan.dailyCalories} KCAL
+                      </div>
+                    </div>
+
+                    <div className="h-px w-full bg-border my-4"></div>
+
+                    <div className="space-y-4">
+                      {currentPlan.dietPlan.meals.map((meal, index) => (
+                        <div
+                          key={index}
+                          className="border border-border rounded-lg overflow-hidden p-4"
+                        >
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="w-2 h-2 rounded-full bg-primary"></div>
+                            <h4 className="font-mono text-primary">
+                              {meal.name}
+                            </h4>
+                          </div>
+                          <ul className="space-y-2">
+                            {meal.foods.map((food, foodIndex) => (
+                              <li
+                                key={foodIndex}
+                                className="flex items-center gap-2 text-sm text-muted-foreground"
+                              >
+                                <span className="text-xs text-primary font-mono">
+                                  {String(foodIndex + 1).padStart(2, "0")}
+                                </span>
+                                {food}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </TabsContent>
               </Tabs>
