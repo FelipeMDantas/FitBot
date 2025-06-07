@@ -125,17 +125,20 @@ const GenerateProgramPage = () => {
           ? `${user.firstName} ${user.lastName || ""}`.trim()
           : "There";
 
+        console.log("128: userid", user?.id,);
+        console.log("129: allPlans", fullName);
+
         await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
           variableValues: {
             full_name: fullName,
             user_id: user?.id,
           },
-          clientMessages: messages.filter((msg) => {
+          /*clientMessages: messages.filter((msg) => {
             return msg.role !== "assistant";
           }),
           serverMessages: messages.filter((msg) => {
             return msg.role === "assistant";
-          }),
+          }),*/
         });
       } catch (error) {
         console.log("Failed to start call", error);
