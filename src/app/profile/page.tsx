@@ -7,7 +7,7 @@ import { api } from "../../../convex/_generated/api";
 import NoFitnessPlan from "@/components/NoFitnessPlan";
 import CornerElements from "@/components/CornerElements";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarIcon, DumbbellIcon } from "lucide-react";
 import {
@@ -23,11 +23,6 @@ const ProfilePage = () => {
 
   const allPlans = useQuery(api.plans.getUserPlans, { userId });
   const [selectedPlanId, setSelectedPlanId] = useState<null | string>(null);
-
-  useEffect(() => {
-    console.log("27: userid", userId);
-    console.log("28: allPlans", allPlans);
-  }, []);
 
   const activePlan = allPlans?.find((plan) => plan.isActive);
 
