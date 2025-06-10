@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FitBot
 
-## Getting Started
+## A workout builder platform
 
-First, run the development server:
+![Felipe|FitBot](https://img.shields.io/badge/FelipeMDantas-FitBot-blue)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![NextJS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> This platform allows profile features such as sign up, sign in, and profile management. Then, the user can create a personalized workout routine through their interaction with the Fitbot AI.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Take a look at the page
 
-## Learn More
+<img src = gif/page_gif.gif>
 
-To learn more about Next.js, take a look at the following resources:
+### or... give it a try!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+https://fit-bot-delta.vercel.app/
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tech
 
-## Deploy on Vercel
+A couple of technologies were employed in this project. Among them:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [NextJS] - a React framework that gives you building blocks to create web applications
+- [Clerk] - a user management platform
+- [Vapi] - provides voice AI agents for developers
+- [Clsx] - an utility for constructing className strings conditionally
+- [Convex] - a fullstack TypeScript development platform
+- [Lucide] - an icon package
+- [Svix] - a library for interacting with the Svix API
+- [Tailwind] - a utility-first CSS framework
+- [TypeScript] - a strongly typed programming language that builds on JavaScript
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+  [nextjs]: https://nextjs.org/
+  [clerk]: https://clerk.com/
+  [vapi]: https://vapi.ai/
+  [clsx]: https://www.npmjs.com/package/clsx
+  [convex]: https://www.convex.dev/
+  [lucide]: https://lucide.dev/
+  [svix]: https://github.com/svix/svix-webhooks
+  [tailwind]: https://tailwindcss.com/
+  [typescript]: https://www.typescriptlang.org/
